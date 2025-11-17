@@ -14,7 +14,7 @@ const items = [
 ] as const
 
 type LinkItemProps = { href: string; label: string; activeId: string; onClick?: () => void }
-function LinkItem({ href, label, activeId, onClick }: LinkItemProps) {
+function LinkItem({ href, label, activeId, onClick }: Readonly<LinkItemProps>) {
   const isActive = activeId === href.replace('#', '')
   return (
     <a

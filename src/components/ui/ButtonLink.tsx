@@ -8,7 +8,7 @@ type ButtonLinkProps = {
   external?: boolean
 }
 
-export function ButtonLink({ href, children, variant = 'primary', leftIcon, external }: ButtonLinkProps) {
+export function ButtonLink({ href, children, variant = 'primary', leftIcon, external }: Readonly<ButtonLinkProps>) {
   const base = 'inline-flex items-center gap-2 rounded-md px-4 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2'
   const variants = {
     primary: 'bg-indigo-600 text-white shadow hover:bg-indigo-500',

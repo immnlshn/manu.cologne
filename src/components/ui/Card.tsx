@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { motion } from 'motion/react'
 
-export function Card({ children }: { children: ReactNode }) {
+export function Card({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -4 }}

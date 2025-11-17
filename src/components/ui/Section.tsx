@@ -7,7 +7,7 @@ type SectionProps = {
   children: ReactNode
 }
 
-export function Section({ id, children }: SectionProps) {
+export function Section({ id, children }: Readonly<SectionProps>) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
@@ -25,7 +25,7 @@ export function Section({ id, children }: SectionProps) {
   )
 }
 
-export function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }) {
+export function SectionHeader({ title, subtitle }: Readonly<{ title: string; subtitle?: string }>) {
   return (
     <header>
       <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
