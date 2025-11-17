@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="relative">
       <motion.div style={{ y: glowY, opacity: glowOpacity }} className="pointer-events-none absolute inset-x-0 top-0 -z-10 overflow-hidden" aria-hidden>
-        <div className="relative h-[85vh]">
+        <div className="relative">
           <div className="absolute left-1/2 -top-[50rem] h-[120rem] w-[120rem] -translate-x-1/2 rounded-full bg-indigo-300/18 dark:bg-indigo-900/18 blur-3xl [mask-image:radial-gradient(closest-side,white_22%,transparent_72%)]" />
         </div>
       </motion.div>

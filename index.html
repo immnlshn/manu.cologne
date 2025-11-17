@@ -1,44 +1,52 @@
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light dark" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="color-scheme" content="light dark"/>
 
     <!-- Primary Meta Tags -->
-    <title>Immanuel Sohn — Software Engineer</title>
-    <meta name="title" content="Immanuel Sohn — Software Engineer" />
-    <meta name="description" content="Software engineer working with Java and React. Building maintainable systems across architecture, delivery, and collaboration." />
-    <meta name="keywords" content="Software Engineer, Java, Spring Boot, React, TypeScript, Full-Stack Developer, Web Development, Cologne, Bonn" />
-    <meta name="author" content="Immanuel Sohn" />
+    <title>Immanuel Sohn</title>
+    <meta name="title" content="Immanuel Sohn — Software Engineer"/>
+    <meta name="description"
+          content="Software engineer working with Java and React. Building maintainable systems across architecture, delivery, and collaboration."/>
+    <meta name="keywords"
+          content="Software Engineer, Java, Spring Boot, React, TypeScript, Full-Stack Developer, Web Development, Cologne, Bonn"/>
+    <meta name="author" content="Immanuel Sohn"/>
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://manu.cologne/" />
-    <meta property="og:title" content="Immanuel Sohn — Software Engineer" />
-    <meta property="og:description" content="Software engineer working with Java and React. Building maintainable systems across architecture, delivery, and collaboration." />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://manu.cologne/"/>
+    <meta property="og:title" content="Immanuel Sohn — Software Engineer"/>
+    <meta property="og:description"
+          content="Software engineer working with Java and React. Building maintainable systems across architecture, delivery, and collaboration."/>
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://manu.cologne/" />
-    <meta property="twitter:title" content="Immanuel Sohn — Software Engineer" />
-    <meta property="twitter:description" content="Software engineer working with Java and React. Building maintainable systems across architecture, delivery, and collaboration." />
+    <meta property="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:url" content="https://manu.cologne/"/>
+    <meta property="twitter:title" content="Immanuel Sohn — Software Engineer"/>
+    <meta property="twitter:description"
+          content="Software engineer working with Java and React. Building maintainable systems across architecture, delivery, and collaboration."/>
 
+    <link rel="icon" href="/favicon.ico" sizes="48x48" >
     <!-- Prevent flash of unstyled content (FOUC) for dark mode -->
     <script>
-      (function() {
-        try {
-          const stored = localStorage.getItem('theme');
-          const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const isDark = stored === 'dark' || (stored !== 'light' && prefersDark);
-          document.documentElement.classList.toggle('dark', isDark);
-        } catch (_) { /* noop */ }
-      })();
+        (function () {
+            try {
+                const stored = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const isDark = stored === 'dark' || (stored !== 'light' && prefersDark);
+                document.documentElement.classList.toggle('dark', isDark);
+            } catch (_) { /* noop */
+            }
+        })();
     </script>
-  </head>
-  <body class="antialiased font-sans bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
-    <a href="#home" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white/90 dark:focus:bg-zinc-900/90 focus:px-3 focus:py-2 focus:shadow">Skip to content</a>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+</head>
+<body class="antialiased font-sans bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+<a href="#home"
+   class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white/90 dark:focus:bg-zinc-900/90 focus:px-3 focus:py-2 focus:shadow">Skip
+    to content</a>
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
+</body>
 </html>

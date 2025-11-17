@@ -29,9 +29,9 @@ export function Hero() {
               Hi, I'm <span className="text-indigo-600 dark:text-indigo-400">{hero.name}</span>.{' '}
               <span className="inline-block">
                 I turn complex ideas into{' '}
-                <span className="inline-flex items-baseline">
+                {/*<span className="inline-flex items-baseline">*/}
                   <span
-                    className="inline-flex items-baseline justify-start w-[12rem]"
+                    className="inline-flex items-baseline justify-start w-[9.5rem] sm:w-[13rem] text-wrap"
                   >
                     <AnimatePresence mode="wait">
                       <motion.span
@@ -47,7 +47,7 @@ export function Hero() {
                     </AnimatePresence>
                   </span>{' '}
                   software.
-                </span>
+                {/*</span>*/}
                 <br className="hidden lg:block" />
               </span>
             </motion.h1>
@@ -65,7 +65,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
-              className="mt-6 flex gap-3"
+              className="mt-6 flex flex-wrap gap-3"
             >
               <ButtonLink href="#projects" leftIcon={<FolderGit2 className="h-4 w-4" />}>View Projects</ButtonLink>
               <ButtonLink href="#contact" variant="outline" leftIcon={<Mail className="h-4 w-4" />}>Contact Me</ButtonLink>
