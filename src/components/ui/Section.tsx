@@ -28,7 +28,7 @@ export function Section({ id, children }: Readonly<SectionProps>) {
 export function SectionHeader({ title, subtitle }: Readonly<{ title: string; subtitle?: string }>) {
   return (
     <header>
-      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
+      <h2 className="text-2xl font-semibold tracking-tight text-balance sm:text-3xl">{title}</h2>
       {subtitle ? (
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">{subtitle}</p>
       ) : null}

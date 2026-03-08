@@ -49,7 +49,7 @@ export function CV() {
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 30, mass: 0.3 }}
               className={
-                'relative inline-flex items-center gap-2 overflow-hidden rounded-full border px-3 py-1.5 text-sm transition ' +
+                'relative inline-flex items-center gap-2 overflow-hidden rounded-full border px-3 py-1.5 text-sm touch-manipulation transition-colors ' +
                 (selected
                   ? 'border-indigo-500 text-indigo-700 dark:border-indigo-400/60 dark:text-indigo-300'
                   : 'border-zinc-200 text-zinc-700 hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900')
@@ -63,7 +63,7 @@ export function CV() {
                   aria-hidden
                 />
               )}
-              <Icon className="h-4 w-4" /> <span className="relative z-10">{label}</span>
+              <Icon className="h-4 w-4" aria-hidden="true" /> <span className="relative z-10">{label}</span>
             </motion.button>
           )
         })}
@@ -84,7 +84,7 @@ export function CV() {
               <motion.div key={`${e.role}-${e.org}`} variants={cardVariants}>
                 <Card>
                   <h3 className="flex items-center gap-2 text-base font-medium text-zinc-800 dark:text-zinc-200">
-                    <BriefcaseBusiness className="h-4 w-4 text-zinc-500" />
+                    <BriefcaseBusiness className="h-4 w-4 text-zinc-500" aria-hidden="true" />
                     {e.role} — {e.org}
                   </h3>
                   <p className="text-sm text-zinc-500">{e.period}</p>
@@ -105,7 +105,7 @@ export function CV() {
               <motion.div key={`${ed.degree}-${ed.org}`} variants={cardVariants}>
                 <Card>
                   <h3 className="flex items-center gap-2 text-base font-medium text-zinc-800 dark:text-zinc-200">
-                    <GraduationCap className="h-4 w-4 text-zinc-500" />
+                    <GraduationCap className="h-4 w-4 text-zinc-500" aria-hidden="true" />
                     {ed.degree} — {ed.org}
                   </h3>
                   <p className="text-sm text-zinc-500">{ed.period}</p>

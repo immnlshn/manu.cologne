@@ -7,7 +7,7 @@ import { Skills } from "./components/Skills.tsx";
 import { CV } from "./components/CV.tsx";
 import { Footer } from "./components/Footer.tsx";
 import { useTheme } from "./hooks/useTheme";
-import { motion, useScroll, useTransform } from 'motion/react'
+import { motion, useScroll, useTransform, MotionConfig } from 'motion/react'
 
 function App() {
   useTheme()
@@ -16,6 +16,7 @@ function App() {
   const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.9, 0.75])
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="relative">
       <motion.div style={{ y: glowY, opacity: glowOpacity }} className="pointer-events-none absolute inset-x-0 top-0 -z-10 overflow-hidden" aria-hidden>
         <div className="relative">
@@ -34,6 +35,7 @@ function App() {
       </main>
       <Footer />
     </div>
+    </MotionConfig>
   )
 }
 

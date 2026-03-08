@@ -24,7 +24,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="text-4xl/tight font-semibold tracking-tight sm:text-5xl/tight"
+              className="text-4xl/tight font-semibold tracking-tight text-pretty sm:text-5xl/tight"
             >
               Hi, I'm <span className="text-indigo-600 dark:text-indigo-400">{hero.name}</span>.{' '}
               <span className="inline-block">

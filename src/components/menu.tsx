@@ -20,7 +20,7 @@ function LinkItem({ href, label, activeId, onClick }: Readonly<LinkItemProps>) {
     <a
       href={href}
       onClick={onClick}
-      aria-current={isActive ? 'true' : undefined}
+      aria-current={isActive ? 'page' : undefined}
       className={
         'block px-3 py-2 text-sm transition-colors hover:text-zinc-900 dark:hover:text-zinc-100 ' +
         (isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-zinc-600 dark:text-zinc-400')
@@ -88,7 +88,7 @@ export function Menu() {
               aria-label="Toggle menu"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full text-zinc-700 transition hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
             >
-              {mobileOpen ? <X className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
+              {mobileOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <MenuIcon className="h-5 w-5" aria-hidden="true" />}
             </button>
           </div>
         </div>

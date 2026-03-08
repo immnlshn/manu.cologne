@@ -48,9 +48,9 @@ export function About() {
               {about.learnings.map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   {item.toLowerCase().includes('design') ? (
-                    <Palette className="mt-0.5 h-4 w-4" />
+                    <Palette className="mt-0.5 h-4 w-4" aria-hidden="true" />
                   ) : (
-                    <Lightbulb className="mt-0.5 h-4 w-4" />
+                    <Lightbulb className="mt-0.5 h-4 w-4" aria-hidden="true" />
                   )}
                   {item}
                 </li>

@@ -35,7 +35,7 @@ export function Skills() {
           <motion.div key={group} variants={cardVariants}>
             <Card>
               <h3 className="flex items-center gap-2 text-sm font-medium tracking-wide text-zinc-700 dark:text-zinc-300">
-                <Check className="h-4 w-4 text-zinc-400 dark:text-zinc-500" />
+                <Check className="h-4 w-4 text-zinc-400 dark:text-zinc-500" aria-hidden="true" />
                 {group}
               </h3>
               <ul className="mt-3 flex flex-wrap gap-2">
