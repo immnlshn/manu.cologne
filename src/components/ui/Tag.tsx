@@ -1,8 +1,10 @@
-import type { ReactNode } from 'react'
-
-export function Tag({ children }: Readonly<{ children: ReactNode }>) {
+import type { ComponentPropsWithoutRef } from 'react'
+export function Tag({ children, ...props }: ComponentPropsWithoutRef<'span'>) {
   return (
-    <span className="inline-flex items-center rounded-full border border-zinc-200/70 px-2 py-0.5 text-xs text-zinc-700 dark:border-zinc-800/70 dark:text-zinc-300">
+    <span
+      {...props}
+      className="inline-flex items-center rounded-full border border-zinc-200/70 px-2 py-0.5 text-xs text-zinc-700 dark:border-zinc-800/70 dark:text-zinc-300"
+    >
       {children}
     </span>
   )
