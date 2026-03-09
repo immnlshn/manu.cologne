@@ -17,7 +17,6 @@ export function ThemeToggle() {
           ? 'color-mix(in srgb, var(--lavender) 25%, var(--surface-2))'
           : 'color-mix(in srgb, var(--peach) 20%, var(--surface-2))',
         border: '1px solid var(--border)',
-        focusVisibleRingColor: 'var(--rose)',
       }}
     >
       <motion.div
