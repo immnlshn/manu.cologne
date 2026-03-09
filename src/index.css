@@ -1,25 +1,124 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource-variable/plus-jakarta-sans";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Base adjustments */
+/* ─────────────────────────────────────────────
+   Design Tokens
+───────────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --bg:          #F5F5F2;
+  --bg-raised:   #EBEBЕ7;
+  --surface:     #FFFFFF;
+  --surface-2:   #F0F0EC;
+
+  /* Text */
+  --text:        #111110;
+  --text-2:      #3C3C3A;
+  --text-muted:  #898980;
+
+  /* Accents */
+  --rose:        #C4455C;
+  --sage:        #3D9460;
+  --peach:       #CC6D3C;
+  --lavender:    #3B7DD8;
+
+  /* Structural */
+  --border:      #E2E2DE;
+  --border-2:    #CECEC8;
+
+  /* Typography */
+  --font-display: 'DM Sans Variable', system-ui, sans-serif;
+  --font-body:    'Plus Jakarta Sans Variable', system-ui, sans-serif;
+
+  /* Scrollbar */
+  scrollbar-color: var(--border-2) var(--bg);
+  scrollbar-width: thin;
+}
+
+.dark {
+  /* Surfaces — true black */
+  --bg:          #080808;
+  --bg-raised:   #111111;
+  --surface:     #161616;
+  --surface-2:   #1E1E1E;
+
+  /* Text */
+  --text:        #E8E8E8;
+  --text-2:      #8A8A8A;
+  --text-muted:  #4A4A4A;
+
+  /* Accents — blue highlight on black */
+  --rose:        #E06070;
+  --sage:        #4EAD78;
+  --peach:       #E07C55;
+  --lavender:    #4A9FFF;
+
+  /* Structural */
+  --border:      #252525;
+  --border-2:    #333333;
+
+  scrollbar-color: var(--border-2) var(--bg);
+}
+
+/* ─────────────────────────────────────────────
+   Base
+───────────────────────────────────────────── */
 @layer base {
-  :root {
-    font-family: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  html {
+    font-family: var(--font-body);
+    background-color: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   html, body, #root {
-    height: 100%;
+    min-height: 100%;
+  }
+  body {
+    background-color: var(--bg);
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
   ::selection {
-    background: rgb(79 70 229 / 0.25);
+    background: color-mix(in srgb, var(--rose) 22%, transparent);
+    color: var(--text);
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-variation-settings: "wght" 700;
   }
 }
 
-/* Global container utility */
+/* ─────────────────────────────────────────────
+   Utilities
+───────────────────────────────────────────── */
 @utility container {
   margin-inline: auto;
-  padding-inline: 1rem;
+  padding-inline: clamp(1.25rem, 5vw, 3rem);
   width: 100%;
-  max-width: 80rem;
+  max-width: 82rem;
 }
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility font-body {
+  font-family: var(--font-body);
+}
+
+@utility text-rose { color: var(--rose); }
+@utility text-sage  { color: var(--sage); }
+@utility text-peach { color: var(--peach); }
+@utility text-lavender { color: var(--lavender); }
+
+@utility bg-surface  { background-color: var(--surface); }
+@utility bg-surface-2 { background-color: var(--surface-2); }
+@utility bg-base     { background-color: var(--bg); }
+
+@utility border-token { border-color: var(--border); }
+@utility text-token    { color: var(--text); }
+@utility text-token-2  { color: var(--text-2); }
+@utility text-muted    { color: var(--text-muted); }

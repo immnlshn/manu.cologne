@@ -7,34 +7,52 @@ import { Skills } from "./components/Skills.tsx";
 import { CV } from "./components/CV.tsx";
 import { Footer } from "./components/Footer.tsx";
 import { useTheme } from "./hooks/useTheme";
-import { motion, useScroll, useTransform, MotionConfig } from 'motion/react'
+import { MotionConfig } from 'motion/react'
 
 function App() {
   useTheme()
-  const { scrollYProgress } = useScroll()
-  const glowY = useTransform(scrollYProgress, [0, 1], [0, 200])
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.9, 0.75])
 
   return (
     <MotionConfig reducedMotion="user">
-    <div className="relative">
-      <motion.div style={{ y: glowY, opacity: glowOpacity }} className="pointer-events-none absolute inset-x-0 top-0 -z-10 overflow-hidden" aria-hidden>
-        <div className="relative">
-          <div className="absolute left-1/2 -top-[50rem] h-[120rem] w-[120rem] -translate-x-1/2 rounded-full bg-indigo-300/18 dark:bg-indigo-900/18 blur-3xl [mask-image:radial-gradient(closest-side,white_22%,transparent_72%)]" />
-        </div>
-      </motion.div>
+      {/* Grain overlay — fixed pseudo layer */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-[9999] opacity-[0.032]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+        }}
+      />
 
-      <Menu />
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <CV />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+      <div
+        className="relative min-h-screen"
+        style={{ backgroundColor: 'var(--bg)', color: 'var(--text)' }}
+      >
+        {/* Global gradient mesh background */}
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 -z-10"
+          style={{
+            background: `
+              radial-gradient(ellipse 80% 50% at 10% 15%, color-mix(in srgb, var(--rose) 7%, transparent) 0%, transparent 65%),
+              radial-gradient(ellipse 60% 60% at 88% 75%, color-mix(in srgb, var(--lavender) 8%, transparent) 0%, transparent 65%),
+              radial-gradient(ellipse 45% 45% at 55% 45%, color-mix(in srgb, var(--peach) 5%, transparent) 0%, transparent 70%),
+              var(--bg)
+            `,
+          }}
+        />
+
+        <Menu />
+        <main id="main-content">
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <CV />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </MotionConfig>
   )
 }

@@ -1,125 +1,186 @@
-import { BriefcaseBusiness, GraduationCap } from 'lucide-react'
-import { Section, SectionHeader } from './ui/Section'
-import { Card } from './ui/Card'
-import { education, experience, cvContent } from '../content'
 import { motion } from 'motion/react'
-import { useState } from 'react'
+import { experience, education, cvContent } from '../content'
+import type { ExperienceItem, EducationItem } from '../types/content'
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
+const ease = [0.22, 1, 0.36, 1] as const
+
+type TimelineItemProps = {
+  title: string
+  org: string
+  period: string
+  points: string[]
+  index: number
+  accent: string
 }
 
-const cardVariants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: { opacity: 1, x: 0 },
+function TimelineItem({ title, org, period, points, index, accent }: TimelineItemProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.6, ease, delay: index * 0.1 }}
+      className="relative pl-8"
+    >
+      {/* Timeline dot */}
+      <div
+        className="absolute left-0 top-1.5 h-3 w-3 rounded-full"
+        style={{
+          backgroundColor: accent,
+          boxShadow: `0 0 0 4px color-mix(in srgb, ${accent} 18%, transparent)`,
+        }}
+      />
+      {/* Vertical line (not last) */}
+      <div
+        className="absolute left-[5px] top-4 bottom-[-2rem] w-px"
+        style={{ backgroundColor: 'var(--border)' }}
+      />
+
+      <div
+        className="text-xs tracking-[0.15em] uppercase mb-1"
+        style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}
+      >
+        {period}
+      </div>
+      <h3
+        style={{
+          fontFamily: 'var(--font-display)',
+          fontVariationSettings: '"wght" 700',
+          fontSize: '1.05rem',
+          color: 'var(--text)',
+          lineHeight: '1.3',
+          letterSpacing: '-0.01em',
+        }}
+      >
+        {title}
+      </h3>
+      <p
+        className="mt-0.5 text-sm font-medium"
+        style={{ color: accent, fontFamily: 'var(--font-body)' }}
+      >
+        {org}
+      </p>
+      <ul className="mt-3 space-y-1.5 mb-8">
+        {points.map((pt) => (
+          <li
+            key={pt}
+            className="flex items-start gap-2 text-sm leading-relaxed"
+            style={{ color: 'var(--text-2)', fontFamily: 'var(--font-body)' }}
+          >
+            <span
+              className="mt-2 h-1 w-1 rounded-full shrink-0"
+              style={{ backgroundColor: 'var(--text-muted)' }}
+            />
+            {pt}
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  )
 }
 
 export function CV() {
-  const [activeTab, setActiveTab] = useState<'experience' | 'education'>('experience')
-
-  const tabs = [
-    { key: 'experience' as const, label: 'Experience', icon: BriefcaseBusiness },
-    { key: 'education' as const, label: 'Education', icon: GraduationCap },
-  ]
-
   return (
-    <Section id="cv">
-      <SectionHeader title="CV" subtitle={cvContent.subtitle} />
-
-      {/* Tabs */}
-      <div role="tablist" aria-label="CV tabs" className="mt-4 flex gap-2">
-        {tabs.map(({ key, label, icon: Icon }) => {
-          const selected = activeTab === key
-          return (
-            <motion.button
-              key={key}
-              role="tab"
-              aria-selected={selected}
-              aria-controls={`${key}-panel`}
-              id={`${key}-tab`}
-              onClick={() => setActiveTab(key)}
-              whileHover={{ y: -1, scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 30, mass: 0.3 }}
-              className={
-                'relative inline-flex items-center gap-2 overflow-hidden rounded-full border px-3 py-1.5 text-sm touch-manipulation transition-colors ' +
-                (selected
-                  ? 'border-indigo-500 text-indigo-700 dark:border-indigo-400/60 dark:text-indigo-300'
-                  : 'border-zinc-200 text-zinc-700 hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900')
-              }
+    <section id="cv" className="relative scroll-mt-24 py-28">
+      <div className="container">
+        {/* Header */}
+        <div className="mb-16">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease }}
+            className="text-xs tracking-[0.25em] uppercase mb-3"
+            style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}
+          >
+            Background
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease, delay: 0.05 }}
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontVariationSettings: '"wght" 700',
+              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+              color: 'var(--text)',
+              lineHeight: '1.1',
+              letterSpacing: '-0.02em',
+            }}
+          >
+            CV
+          </motion.h2>
+          {cvContent.subtitle && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="mt-2 text-sm"
+              style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}
             >
-              {selected && (
-                <motion.span
-                  layoutId="cv-tab-active-bg"
-                  className="absolute inset-0 rounded-full bg-indigo-50 dark:bg-indigo-950/30"
-                  transition={{ type: 'spring', stiffness: 350, damping: 30, mass: 0.25 }}
-                  aria-hidden
-                />
-              )}
-              <Icon className="h-4 w-4" aria-hidden="true" /> <span className="relative z-10">{label}</span>
-            </motion.button>
-          )
-        })}
+              {cvContent.subtitle}
+            </motion.p>
+          )}
+        </div>
+
+        {/* Split columns */}
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
+          {/* Experience */}
+          <div>
+            <motion.p
+              initial={{ opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease }}
+              className="text-xs tracking-[0.25em] uppercase mb-8 flex items-center gap-3"
+              style={{ color: 'var(--rose)', fontFamily: 'var(--font-body)' }}
+            >
+              <span className="h-px w-8" style={{ backgroundColor: 'var(--rose)' }} />
+              Experience
+            </motion.p>
+            {experience.map((e: ExperienceItem, i: number) => (
+              <TimelineItem
+                key={`${e.role}-${e.org}`}
+                title={e.role}
+                org={e.org}
+                period={e.period}
+                points={e.points}
+                index={i}
+                accent="var(--rose)"
+              />
+            ))}
+          </div>
+
+          {/* Education */}
+          <div>
+            <motion.p
+              initial={{ opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease, delay: 0.1 }}
+              className="text-xs tracking-[0.25em] uppercase mb-8 flex items-center gap-3"
+              style={{ color: 'var(--lavender)', fontFamily: 'var(--font-body)' }}
+            >
+              <span className="h-px w-8" style={{ backgroundColor: 'var(--lavender)' }} />
+              Education
+            </motion.p>
+            {education.map((ed: EducationItem, i: number) => (
+              <TimelineItem
+                key={`${ed.degree}-${ed.org}`}
+                title={ed.degree}
+                org={ed.org}
+                period={ed.period}
+                points={ed.points}
+                index={i}
+                accent="var(--lavender)"
+              />
+            ))}
+          </div>
+        </div>
       </div>
-
-      {/* Panels */}
-      <motion.div
-        key={activeTab}
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, margin: '-50px' }}
-        className="mt-6 space-y-6"
-      >
-        {activeTab === 'experience' && (
-          <div role="tabpanel" id="experience-panel" aria-labelledby="experience-tab" className="space-y-6">
-            {experience.map((e) => (
-              <motion.div key={`${e.role}-${e.org}`} variants={cardVariants}>
-                <Card>
-                  <h3 className="flex items-center gap-2 text-base font-medium text-zinc-800 dark:text-zinc-200">
-                    <BriefcaseBusiness className="h-4 w-4 text-zinc-500" aria-hidden="true" />
-                    {e.role} — {e.org}
-                  </h3>
-                  <p className="text-sm text-zinc-500">{e.period}</p>
-                  <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-700 dark:text-zinc-300">
-                    {e.points.map((pt) => (
-                      <li key={pt}>{pt}</li>
-                    ))}
-                  </ul>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {activeTab === 'education' && (
-          <div role="tabpanel" id="education-panel" aria-labelledby="education-tab" className="space-y-6">
-            {education.map((ed) => (
-              <motion.div key={`${ed.degree}-${ed.org}`} variants={cardVariants}>
-                <Card>
-                  <h3 className="flex items-center gap-2 text-base font-medium text-zinc-800 dark:text-zinc-200">
-                    <GraduationCap className="h-4 w-4 text-zinc-500" aria-hidden="true" />
-                    {ed.degree} — {ed.org}
-                  </h3>
-                  <p className="text-sm text-zinc-500">{ed.period}</p>
-                  <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-700 dark:text-zinc-300">
-                    {ed.points.map((pt) => (
-                      <li key={pt}>{pt}</li>
-                    ))}
-                  </ul>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        )}
-      </motion.div>
-    </Section>
+    </section>
   )
 }
+

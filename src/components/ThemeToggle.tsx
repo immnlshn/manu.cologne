@@ -1,4 +1,4 @@
-import { Sun, Moon } from 'lucide-react'
+import { motion, AnimatePresence } from 'motion/react'
 import { useTheme } from '../hooks/useTheme'
 
 export function ThemeToggle() {
@@ -10,12 +10,41 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-pressed={isDark}
-      title={`Toggle theme (currently ${effectiveTheme})`}
-      className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200/60 bg-white/70 text-zinc-700 shadow-sm backdrop-blur touch-manipulation transition-colors hover:bg-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:border-zinc-800/60 dark:bg-zinc-900/70 dark:text-zinc-200 dark:hover:bg-zinc-900/90"
+      title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      className="relative inline-flex h-8 w-[3.25rem] items-center rounded-full transition-all duration-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 shrink-0"
+      style={{
+        backgroundColor: isDark
+          ? 'color-mix(in srgb, var(--lavender) 25%, var(--surface-2))'
+          : 'color-mix(in srgb, var(--peach) 20%, var(--surface-2))',
+        border: '1px solid var(--border)',
+        focusVisibleRingColor: 'var(--rose)',
+      }}
     >
-      <Sun className={"h-5 w-5 transition-transform duration-300 " + (isDark ? 'scale-0 rotate-90' : 'scale-100 rotate-0')} aria-hidden="true" />
-      <Moon className={"absolute h-5 w-5 transition-transform duration-300 " + (isDark ? 'scale-100 rotate-0' : 'scale-0 -rotate-90')} aria-hidden="true" />
+      <motion.div
+        layout
+        transition={{ type: 'spring', stiffness: 700, damping: 40 }}
+        className="flex h-6 w-6 items-center justify-center rounded-full shadow-sm"
+        style={{
+          backgroundColor: isDark ? 'var(--lavender)' : 'var(--peach)',
+          margin: isDark ? '0 2px 0 auto' : '0 auto 0 2px',
+        }}
+      >
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={isDark ? 'moon' : 'sun'}
+            initial={{ scale: 0, rotate: -90 }}
+            animate={{ scale: 1, rotate: 0 }}
+            exit={{ scale: 0, rotate: 90 }}
+            transition={{ duration: 0.22 }}
+            className="text-xs"
+            aria-hidden
+          >
+            {isDark ? '☽' : '☀'}
+          </motion.span>
+        </AnimatePresence>
+      </motion.div>
       <span className="sr-only">Toggle theme</span>
     </button>
   )
 }
+

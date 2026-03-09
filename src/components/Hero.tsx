@@ -1,96 +1,234 @@
-import { Mail, FolderGit2 } from 'lucide-react'
-import { ButtonLink } from './ui/ButtonLink'
+import { motion } from 'motion/react'
 import { hero } from '../content'
-import { motion, AnimatePresence } from 'motion/react'
-import { useState, useEffect, useMemo } from 'react'
+
+const ease = [0.22, 1, 0.36, 1] as const
 
 export function Hero() {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0)
-  const words = useMemo(() => hero.rotatingWords ?? ['passion'], [])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWordIndex((prev) => (prev + 1) % words.length)
-    }, 2500)
-    return () => clearInterval(interval)
-  }, [words.length])
 
   return (
-    <section id="home" className="relative scroll-mt-28 pt-36 pb-24 sm:pt-40 sm:pb-32">
-      <div className="container">
-        <div className="relative grid items-center gap-8 sm:grid-cols-12">
-          <div className="sm:col-span-7">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="text-4xl/tight font-semibold tracking-tight text-pretty sm:text-5xl/tight"
-            >
-              Hi, I'm <span className="text-indigo-600 dark:text-indigo-400">{hero.name}</span>.{' '}
-              <span className="inline-block">
-                I turn complex ideas into{' '}
-                {/*<span className="inline-flex items-baseline">*/}
-                  <span
-                    className="inline-flex items-baseline justify-start w-[9.5rem] sm:w-[13rem] text-wrap"
-                  >
-                    <AnimatePresence mode="wait">
-                      <motion.span
-                        key={currentWordIndex}
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -6 }}
-                        transition={{ duration: 0.25 }}
-                        className="inline-block text-indigo-600 dark:text-indigo-400"
-                      >
-                        {words[currentWordIndex]}
-                      </motion.span>
-                    </AnimatePresence>
-                  </span>{' '}
-                  software.
-                {/*</span>*/}
-                <br className="hidden lg:block" />
-              </span>
-            </motion.h1>
+    <section
+      id="home"
+      className="relative min-h-dvh scroll-mt-0 flex flex-col overflow-hidden"
+    >
+      {/* ── Background blobs ── */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2.4, ease: 'easeOut' }}
+          className="absolute -top-40 -right-40 h-[700px] w-[700px] rounded-full blur-[140px]"
+          style={{ backgroundColor: 'color-mix(in srgb, var(--lavender) 10%, transparent)' }}
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2.2, ease: 'easeOut', delay: 0.4 }}
+          className="absolute bottom-0 -left-32 h-[500px] w-[500px] rounded-full blur-[120px]"
+          style={{ backgroundColor: 'color-mix(in srgb, var(--rose) 8%, transparent)' }}
+        />
+      </div>
 
+      {/* ── Main content ── */}
+      <div className="container flex flex-1 items-center pt-24 pb-16 lg:pt-32">
+        <div className="grid w-full grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+
+          {/* Left: text */}
+          <div className="lg:col-span-7">
+
+            {/* Availability badge */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease, delay: 0.05 }}
+              className="mb-8 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-widest uppercase"
+              style={{
+                border: '1px solid var(--border)',
+                backgroundColor: 'color-mix(in srgb, var(--surface) 70%, transparent)',
+                color: 'var(--text-2)',
+                backdropFilter: 'blur(8px)',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              <span
+                className="h-1.5 w-1.5 rounded-full animate-pulse"
+                style={{ backgroundColor: 'var(--sage)' }}
+              />
+              Software Engineer
+            </motion.div>
+
+            {/* Name — fade+slide reveal, no overflow-hidden so nothing clips */}
+            <h1 className="mt-0 leading-none">
+              <motion.span
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease, delay: 0.15 }}
+                className="block"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontVariationSettings: '"wght" 700',
+                  fontSize: 'clamp(3rem, 7.5vw, 6.5rem)',
+                  lineHeight: '1.1',
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                }}
+              >
+                Immanuel
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease, delay: 0.28 }}
+                className="block"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontVariationSettings: '"wght" 700',
+                  fontSize: 'clamp(3rem, 7.5vw, 6.5rem)',
+                  lineHeight: '1.1',
+                  letterSpacing: '-0.02em',
+                  color: 'var(--lavender)',
+                }}
+              >
+                Sohn
+              </motion.span>
+            </h1>
+
+            {/* Intro text */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
-              className="mt-4 text-base text-zinc-600 dark:text-zinc-400"
+              transition={{ duration: 0.6, ease, delay: 0.4 }}
+              className="mt-5 max-w-lg text-base leading-relaxed lg:text-lg"
+              style={{ color: 'var(--text-2)', fontFamily: 'var(--font-body)' }}
             >
               {hero.intro}
             </motion.p>
 
+            {/* Tech stack */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
-              className="mt-6 flex flex-wrap gap-3"
+              transition={{ duration: 0.55, ease, delay: 0.55 }}
+              className="mt-6 flex flex-wrap gap-2"
             >
-              <ButtonLink href="#projects" leftIcon={<FolderGit2 className="h-4 w-4" />}>View Projects</ButtonLink>
-              <ButtonLink href="#contact" variant="outline" leftIcon={<Mail className="h-4 w-4" />}>Contact Me</ButtonLink>
+              {['Java', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL'].map((t) => (
+                <span
+                  key={t}
+                  className="rounded-md px-2.5 py-1 text-xs font-medium"
+                  style={{
+                    border: '1px solid var(--border)',
+                    color: 'var(--text-2)',
+                    backgroundColor: 'var(--surface-2)',
+                    fontFamily: 'var(--font-body)',
+                  }}
+                >
+                  {t}
+                </span>
+              ))}
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, ease, delay: 0.68 }}
+              className="mt-8 flex flex-wrap items-center gap-3"
+            >
+              <a
+                href="#projects"
+                className="group inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-250"
+                style={{
+                  backgroundColor: 'var(--text)',
+                  color: 'var(--bg)',
+                  fontFamily: 'var(--font-body)',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--lavender)'
+                  ;(e.currentTarget as HTMLElement).style.color = '#fff'
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--text)'
+                  ;(e.currentTarget as HTMLElement).style.color = 'var(--bg)'
+                }}
+              >
+                View projects
+                <span className="transition-transform duration-250 group-hover:translate-x-0.5">→</span>
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-250"
+                style={{
+                  border: '1px solid var(--border-2)',
+                  color: 'var(--text-2)',
+                  fontFamily: 'var(--font-body)',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--lavender)'
+                  ;(e.currentTarget as HTMLElement).style.color = 'var(--lavender)'
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-2)'
+                  ;(e.currentTarget as HTMLElement).style.color = 'var(--text-2)'
+                }}
+              >
+                Get in touch
+              </a>
             </motion.div>
           </div>
 
+          {/* Right: avatar */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
-            className="sm:col-span-5"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease, delay: 0.25 }}
+            className="hidden lg:flex lg:col-span-5 lg:justify-center lg:items-center"
           >
-            <div className="mx-auto w-56 sm:w-64 md:w-72 lg:w-80 xl:w-96">
-              <img
-                src={new URL('../assets/avatar.png', import.meta.url).toString()}
-                alt={hero.name}
-                className="block h-auto w-full"
-                loading="eager"
-                width={384}
-                height={384}
+            <div className="relative" style={{ width: 'clamp(260px, 28vw, 380px)', height: 'clamp(260px, 28vw, 380px)' }}>
+              {/* Glow ring */}
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  boxShadow: '0 0 80px 20px color-mix(in srgb, var(--lavender) 18%, transparent)',
+                }}
               />
+              {/* Circle crop */}
+              <div className="relative w-full h-full rounded-full overflow-hidden"
+                style={{
+                  border: '1.5px solid var(--border)',
+                  background: 'radial-gradient(ellipse at 60% 40%, color-mix(in srgb, var(--lavender) 22%, var(--surface-2)), var(--surface))',
+                }}
+              >
+                <img
+                  src={new URL('../assets/avatar.png', import.meta.url).toString()}
+                  alt={hero.name}
+                  className="w-full h-full object-cover object-top"
+                  loading="eager"
+                />
+              </div>
             </div>
           </motion.div>
+
         </div>
       </div>
+
+      {/* ── Scroll indicator ── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="container pb-8 flex items-center gap-2 self-end"
+        aria-hidden
+      >
+        <div className="h-px w-8" style={{ backgroundColor: 'var(--border-2)' }} />
+        <motion.span
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          className="text-[11px] tracking-widest uppercase"
+          style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}
+        >
+          Scroll
+        </motion.span>
+      </motion.div>
     </section>
   )
 }
+
