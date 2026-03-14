@@ -11,19 +11,12 @@ export const projectsContent: ProjectsContent = {
 			repo: 'https://github.com/immnlshn/Web-Engineering-ToDo-Application',
 		},
 		{
-			title: 'React + XState Thesis Evaluation App',
+			title: 'Donation Box',
 			description:
-				'Thesis evaluation app exploring XState in React. Models complex UI flows as state machines and compares developer experience and maintainability.',
-			stack: ['React', 'XState', 'TypeScript'],
-			repo: 'https://github.com/immnlshn/thesis-react-xstate',
-		},
-		{
-			title: 'React + Redux Thesis Evaluation App',
-			description:
-				'Thesis evaluation app exploring Redux in React. Implements centralized state management for complex UI flows and contrasts the approach with state machines.',
-			stack: ['React', 'Redux', 'TypeScript'],
-			repo: 'https://github.com/immnlshn/thesis-react-redux',
-		},
+				'A Raspberry Pi donation system built as a university team project, with the main focus on backend engineering: FastAPI services, GPIO-based hardware integration, and an event bus for robust asynchronous communication between components.',
+			stack: ['Python', 'FastAPI', 'GPIO', 'Event Bus', 'React'],
+			repo: 'https://github.com/immnlshn/DonationBox',
+		}
 	],
 }
 

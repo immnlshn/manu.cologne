@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { Menu as MenuIcon, X } from 'lucide-react'
 import { ThemeToggle } from './ThemeToggle'
 import { useActiveSection } from '../hooks/useActiveSection'
-import {hero} from "../content";
+import { hero } from '../content'
+import { motion, useScroll, useTransform } from 'motion/react'
 
 const items = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
   { href: '#projects', label: 'Projects' },
   { href: '#skills', label: 'Skills' },
-  { href: '#cv', label: 'CV' },
+  { href: '#cv', label: 'Experience' },
   { href: '#contact', label: 'Contact' },
 ] as const
 
@@ -23,7 +24,7 @@ function LinkItem({ href, label, activeId, onClick }: Readonly<LinkItemProps>) {
       aria-current={isActive ? 'true' : undefined}
       className={
         'block px-3 py-2 text-sm transition-colors hover:text-zinc-900 dark:hover:text-zinc-100 ' +
-        (isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-zinc-600 dark:text-zinc-400')
+        (isActive ? 'text-cyan-600 dark:text-cyan-400' : 'text-zinc-600 dark:text-zinc-400')
       }
     >
       {label}
@@ -35,6 +36,8 @@ export function Menu() {
   const ids = ['home', 'about', 'projects', 'skills', 'cv', 'contact']
   const active = useActiveSection(ids, 96)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { scrollYProgress } = useScroll()
+  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   const closeMobile = () => setMobileOpen(false)
 
@@ -43,15 +46,21 @@ export function Menu() {
       <div className="container">
         {/* Desktop nav */}
         <div className="mx-auto hidden max-w-3xl items-center justify-between rounded-full border border-zinc-200/70 bg-white/60 px-3 py-2 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-white/40 dark:border-zinc-800/70 dark:bg-zinc-900/60 supports-[backdrop-filter]:dark:bg-zinc-900/40 sm:flex">
+          {/* Scroll progress bar */}
+          <motion.div
+            style={{ scaleX, transformOrigin: 'left' }}
+            className="pointer-events-none absolute inset-x-2 bottom-0 h-px rounded-full bg-cyan-500/50 dark:bg-cyan-400/40"
+            aria-hidden
+          />
           <ul className="flex items-center gap-1 sm:gap-2">
             <div className="mx-auto w-8">
               <img
-                  src={new URL('../assets/logo.png', import.meta.url).toString()}
-                  alt={hero.name}
-                  className="block h-auto w-full"
-                  loading="eager"
-                  width={384}
-                  height={384}
+                src={new URL('../assets/logo.png', import.meta.url).toString()}
+                alt={hero.name}
+                className="block h-auto w-full"
+                loading="eager"
+                width={32}
+                height={32}
               />
             </div>
             {items.map((it) => (
@@ -66,20 +75,18 @@ export function Menu() {
         {/* Mobile nav */}
         <div className="flex items-center justify-between rounded-full border border-zinc-200/70 bg-white/60 px-4 py-2 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-white/40 dark:border-zinc-800/70 dark:bg-zinc-900/60 supports-[backdrop-filter]:dark:bg-zinc-900/40 sm:hidden">
           <div className="flex items-center gap-2">
-            <div className="mx-auto w-8">
+            <div className="w-8">
               <img
-                  src={new URL('../assets/logo.png', import.meta.url).toString()}
-                  alt={hero.name}
-                  className="block h-auto w-full"
-                  loading="eager"
-                  width={384}
-                  height={384}
+                src={new URL('../assets/logo.png', import.meta.url).toString()}
+                alt={hero.name}
+                className="block h-auto w-full"
+                loading="eager"
+                width={32}
+                height={32}
               />
             </div>
-            <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">Menu</span>
           </div>
           <div className="flex items-center gap-2">
-
             <ThemeToggle />
             <button
               type="button"

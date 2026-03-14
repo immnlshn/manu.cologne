@@ -1,18 +1,29 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/syne";
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource-variable/jetbrains-mono";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens */
+:root {
+  --font-display: 'Syne Variable', ui-sans-serif, system-ui;
+  --font-body: 'DM Sans Variable', ui-sans-serif, system-ui;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --color-accent: #0891b2;      /* cyan-600 */
+  --color-accent-dark: #22d3ee; /* cyan-400 */
+}
 
 /* Base adjustments */
 @layer base {
   :root {
-    font-family: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    font-family: var(--font-body);
   }
   html, body, #root {
     height: 100%;
   }
   ::selection {
-    background: rgb(79 70 229 / 0.25);
+    background: rgb(8 145 178 / 0.22);
   }
 }
 

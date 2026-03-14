@@ -1,6 +1,4 @@
-import { Lightbulb, Palette } from 'lucide-react'
 import { Section, SectionHeader } from './ui/Section'
-import { Card } from './ui/Card'
 import { about } from '../content'
 import { motion } from 'motion/react'
 
@@ -24,6 +22,7 @@ export function About() {
   return (
     <Section id="about">
       <SectionHeader
+        label="01 — About"
         title="About"
         subtitle={about.subtitle}
       />
@@ -32,31 +31,46 @@ export function About() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="mt-6 grid gap-8 sm:grid-cols-12"
+        className="mt-8 grid gap-12 sm:grid-cols-12"
       >
-        <div className="sm:col-span-7">
+        {/* Bio */}
+        <div className="sm:col-span-7 space-y-4">
           {about.paragraphs.map((p, i) => (
-            <motion.p key={i} variants={itemVariants} className="mt-4 first:mt-0 text-zinc-700 dark:text-zinc-300">
+            <motion.p key={i} variants={itemVariants} className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
               {p}
             </motion.p>
           ))}
         </div>
-        <motion.div variants={itemVariants} className="sm:col-span-5">
-          <Card>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">Currently focusing on</p>
-            <ul className="mt-2 space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+
+        {/* Avatar + facts */}
+        <motion.div variants={itemVariants} className="sm:col-span-5 flex flex-col gap-6">
+          {/* Avatar */}
+          <div className="flex justify-start sm:justify-center">
+            <div className="group relative w-28 sm:w-32">
+              <div className="absolute inset-0 rounded-full bg-cyan-500/20 blur-md transition-opacity duration-300 opacity-0 group-hover:opacity-100" aria-hidden />
+              <img
+                src={new URL('../assets/avatar.png', import.meta.url).toString()}
+                alt="Immanuel Sohn"
+                className="relative block h-auto w-full rounded-full ring-2 ring-zinc-200/60 dark:ring-zinc-800/60 transition-[ring-color] duration-300 group-hover:ring-cyan-500/50"
+                loading="lazy"
+                width={128}
+                height={128}
+              />
+            </div>
+          </div>
+
+          {/* Currently focusing on */}
+          <div>
+            <p className="font-[family-name:var(--font-mono)] text-xs tracking-widest text-zinc-400 uppercase mb-3">Currently exploring</p>
+            <ul className="space-y-2">
               {about.learnings.map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  {item.toLowerCase().includes('design') ? (
-                    <Palette className="mt-0.5 h-4 w-4" />
-                  ) : (
-                    <Lightbulb className="mt-0.5 h-4 w-4" />
-                  )}
+                <li key={item} className="flex items-start gap-2.5 text-sm text-zinc-700 dark:text-zinc-300">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-500" aria-hidden />
                   {item}
                 </li>
               ))}
             </ul>
-          </Card>
+          </div>
         </motion.div>
       </motion.div>
     </Section>
