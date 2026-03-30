@@ -1,4 +1,6 @@
-import { ArrowUpRight, Github } from 'lucide-react'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ArrowUpRight } from 'lucide-react'
 import { Section, SectionHeader } from './ui/Section'
 import { projectsContent } from '../content'
 import { motion } from 'motion/react'
@@ -76,7 +78,7 @@ export function Projects() {
                   rel="noreferrer noopener"
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors"
                 >
-                  <Github className="h-4 w-4" />
+                  <FontAwesomeIcon icon={faGithub} className="h-4 w-4" />
                   Code
                 </a>
               )}

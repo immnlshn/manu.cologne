@@ -46,8 +46,16 @@ export type EducationItem = {
   points: string[]
 }
 
+export type SocialKind = 'github' | 'linkedin'
+
+export type SocialLink = {
+  label: string
+  href: string
+  kind: SocialKind
+}
+
 export type ContactContent = {
   email: string
-  socials: { label: string; href: string; kind: 'github' | 'linkedin' | 'other' }[]
+  socials: SocialLink[]
   subtitle?: string
 }
