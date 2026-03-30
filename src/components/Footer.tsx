@@ -1,4 +1,5 @@
-import { Github, Linkedin } from 'lucide-react'
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { hero, contact } from '../content'
 
 export function Footer() {
@@ -13,12 +14,12 @@ export function Footer() {
         <div className="flex items-center gap-4">
           {github && (
             <a href={github.href} target="_blank" rel="noreferrer noopener" aria-label="GitHub" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
-              <Github className="h-4 w-4" />
+              <FontAwesomeIcon icon={faGithub} className="h-4 w-4" />
             </a>
           )}
           {linkedin && (
             <a href={linkedin.href} target="_blank" rel="noreferrer noopener" aria-label="LinkedIn" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">
-              <Linkedin className="h-4 w-4" />
+              <FontAwesomeIcon icon={faLinkedinIn} className="h-4 w-4" />
             </a>
           )}
         </div>

@@ -1,6 +1,9 @@
-import { Github, Linkedin } from 'lucide-react'
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Section, SectionHeader } from './ui/Section'
 import { contact } from '../content'
+import type { SocialKind } from '../types/content'
 import { motion } from 'motion/react'
 
 const containerVariants = {
@@ -19,9 +22,9 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
 }
 
-const iconMap: Record<string, React.ElementType> = {
-  linkedin: Linkedin,
-  github: Github,
+const socialIconMap: Record<SocialKind, IconDefinition> = {
+  github: faGithub,
+  linkedin: faLinkedinIn,
 }
 
 export function Contact() {
@@ -60,7 +63,7 @@ export function Contact() {
         {/* Social links */}
         <motion.div variants={itemVariants} className="mt-6 flex items-center gap-5">
           {contact.socials.map((social) => {
-            const Icon = iconMap[social.kind] ?? Github
+            const icon = socialIconMap[social.kind]
             return (
               <a
                 key={social.label}
@@ -69,7 +72,7 @@ export function Contact() {
                 rel="noreferrer noopener"
                 className="inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
               >
-                <Icon className="h-4 w-4" />
+                <FontAwesomeIcon icon={icon} className="h-4 w-4" />
                 {social.label}
               </a>
             )
