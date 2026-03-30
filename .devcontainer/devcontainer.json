@@ -5,12 +5,11 @@
     "ghcr.io/devcontainers-extra/features/pnpm:2": {},
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached,relabel=shared",
-  "runArgs": [
-    "--userns=keep-id"
-  ],
   "remoteUser": "node",
-  "postCreateCommand": "pnpm install && gh auth setup-git",
+  "mounts": [
+    "type=volume,source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules"
+  ],
+  "postCreateCommand": "sudo chown node:node node_modules && pnpm install",
   "forwardPorts": [
     5173,
     3000
